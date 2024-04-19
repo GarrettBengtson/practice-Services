@@ -1,10 +1,11 @@
 <div class="container">
   <app-new-account (accountAdded)="onAccountAdded($event)"></app-new-account>
   <hr class="mx-auto w-50" />
+  @for (acc of accounts; track acc; let i = $index) {
   <app-account
-    *ngFor="let acc of accounts; let i = index"
     [account]="acc"
     [id]="i"
     (statusChanged)="onStatusChanged($event)"
   ></app-account>
+  }
 </div>
