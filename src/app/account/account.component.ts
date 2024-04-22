@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { LoggingService } from '../new-account/logging.service';
+import { AccountsService } from '../accounts.service';
 
 @Component({
   selector: 'app-account',
@@ -15,11 +16,12 @@ export class AccountComponent {
     newStatus: string;
   }>();
 
-  constructor(private loggingService: LoggingService) {}
+  constructor(private loggingService: LoggingService, private accountsService: AccountsService) {}
 
   onSetTo(status: string) {
-    this.statusChanged.emit({ id: this.id, newStatus: status });
+    this.accountsService.updateStatus(this.id, status);
+    // this.statusChanged.emit({ id: this.id, newStatus: status });
     this.loggingService.logStatusChanged(status);
-  //   console.log(`A status change occured, the new status is ${status}`);
+    // console.log(`A status change occured, the new status is ${status}`);
   }
 }
